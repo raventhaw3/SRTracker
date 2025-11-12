@@ -125,6 +125,10 @@ button {
   <div class="stat-card">SR: <span id="srCounter">0</span></div>
   <div class="stat-card">K/D: <span id="kdCounter">0</span></div>
   <div class="stat-card">Win Rate: <span id="winRateCounter">0%</span></div>
+  <div class="stat-card">Wins: <span id="winsCounter">0</span></div>
+  <div class="stat-card">Matches: <span id="matchesCounter">0</span></div>
+  <div class="stat-card">Kills: <span id="killsCounter">0</span></div>
+  <div class="stat-card">Deaths: <span id="deathsCounter">0</span></div>
 </div>
 
 <div class="rank-bar-container">
@@ -163,6 +167,10 @@ let player = { gamertag:'', sr:0, wins:0, matches:0, kills:0, deaths:0 };
 const srCounter = new countUp.CountUp('srCounter', 0, { duration: 1 });
 const kdCounter = new countUp.CountUp('kdCounter', 0, { duration: 1, decimalPlaces: 2 });
 const winRateCounter = new countUp.CountUp('winRateCounter', 0, { duration: 1, suffix: '%', decimalPlaces: 1 });
+const winsCounter = new countUp.CountUp('winsCounter', 0, { duration: 1 });
+const matchesCounter = new countUp.CountUp('matchesCounter', 0, { duration: 1 });
+const killsCounter = new countUp.CountUp('killsCounter', 0, { duration: 1 });
+const deathsCounter = new countUp.CountUp('deathsCounter', 0, { duration: 1 });
 
 function savePlayer() { localStorage.setItem('warzonePlayer', JSON.stringify(player)); }
 function loadPlayer() { const saved = localStorage.getItem('warzonePlayer'); if (saved) player = JSON.parse(saved); }
@@ -202,6 +210,12 @@ function updateUI() {
   kdCounter.update(kd);
   const winRate = player.matches ? (player.wins / player.matches * 100) : 0;
   winRateCounter.update(winRate);
+
+  winsCounter.update(player.wins);
+  matchesCounter.update(player.matches);
+  killsCounter.update(player.kills);
+  deathsCounter.update(player.deaths);
+
   updateRankDisplay(player.sr);
 }
 
