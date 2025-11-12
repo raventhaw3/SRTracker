@@ -164,13 +164,23 @@ const rankColors = {
 
 let player = { gamertag:'', sr:0, wins:0, matches:0, kills:0, deaths:0 };
 
-const srCounter = new countUp.CountUp('srCounter', 0, { duration: 1 });
-const kdCounter = new countUp.CountUp('kdCounter', 0, { duration: 1, decimalPlaces: 2 });
-const winRateCounter = new countUp.CountUp('winRateCounter', 0, { duration: 1, suffix: '%', decimalPlaces: 1 });
-const winsCounter = new countUp.CountUp('winsCounter', 0, { duration: 1 });
-const matchesCounter = new countUp.CountUp('matchesCounter', 0, { duration: 1 });
-const killsCounter = new countUp.CountUp('killsCounter', 0, { duration: 1 });
-const deathsCounter = new countUp.CountUp('deathsCounter', 0, { duration: 1 });
+// Initialize CountUp counters
+const srCounter = new countUp.CountUp('srCounter', 0);
+const kdCounter = new countUp.CountUp('kdCounter', 0, { decimalPlaces: 2 });
+const winRateCounter = new countUp.CountUp('winRateCounter', 0, { decimalPlaces: 1, suffix: '%' });
+const winsCounter = new countUp.CountUp('winsCounter', 0);
+const matchesCounter = new countUp.CountUp('matchesCounter', 0);
+const killsCounter = new countUp.CountUp('killsCounter', 0);
+const deathsCounter = new countUp.CountUp('deathsCounter', 0);
+
+// Start all counters
+srCounter.start();
+kdCounter.start();
+winRateCounter.start();
+winsCounter.start();
+matchesCounter.start();
+killsCounter.start();
+deathsCounter.start();
 
 function savePlayer() { localStorage.setItem('warzonePlayer', JSON.stringify(player)); }
 function loadPlayer() { const saved = localStorage.getItem('warzonePlayer'); if (saved) player = JSON.parse(saved); }
